@@ -1,0 +1,52 @@
+﻿@model Buy_Recipes_Final_Project.Models.Recipe
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Recipe</h4>
+    <hr />
+    
+        
+    
+
+            
+                <h2>@Html.DisplayFor(model => model.Title)</h2>
+
+                <h3>
+                    @Html.DisplayNameFor(model => model.Instructions)
+                </h3>
+
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("super_user"))
+                        {
+                                   <p> @Html.Raw(Model.Instructions)</p>
+                        }
+                        else
+                        {
+
+                            <h4>You need to buy the recipe to see the instructions</h4>
+                        }
+
+
+                        
+                      
+                        
+<h4>  Price: $ @Html.DisplayFor(model => model.Price) </h4>
+</div>
+
+<img src="/recipes/@Model.RecipeImageLocation"/>
+<div>
+
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("customer")) {
+
+        <a class="btn btn-primary btn-xl" href="/Payments/Create/@Model.Id">Buy This Recipe</a> 
+}
+</div>

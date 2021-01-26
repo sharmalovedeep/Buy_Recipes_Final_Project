@@ -1,0 +1,30 @@
+﻿@model Buy_Recipes_Final_Project.Models.Payment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2> Payment Done! </h2>
+
+<h3> Hi @Model.Customer.Name Enjoy your meal by follwing the below instructions</h3>
+
+<h4> Instructions </h4>
+
+<img src="/recipes/@Model.Recipe.RecipeImageLocation">
+
+<br>
+<br>
+
+@Html.Raw(Model.Recipe.Instructions)
+
+
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
